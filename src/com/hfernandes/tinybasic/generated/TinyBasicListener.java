@@ -8,6 +8,16 @@ import org.antlr.v4.runtime.tree.ParseTreeListener;
  */
 public interface TinyBasicListener extends ParseTreeListener {
 	/**
+	 * Enter a parse tree produced by {@link TinyBasicParser#program}.
+	 * @param ctx the parse tree
+	 */
+	void enterProgram(TinyBasicParser.ProgramContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link TinyBasicParser#program}.
+	 * @param ctx the parse tree
+	 */
+	void exitProgram(TinyBasicParser.ProgramContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link TinyBasicParser#line}.
 	 * @param ctx the parse tree
 	 */

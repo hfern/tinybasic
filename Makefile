@@ -1,4 +1,5 @@
+ANTLR4 ?= java -jar /usr/local/lib/antlr-4.7-complete.jar
 
 grammar:
-	antlr4 TinyBasic.g4 -o src/com/hfernandes/tinybasic/generated -package com.hfernandes.tinybasic.generated
+	$(ANTLR4) TinyBasic.g4 -o src/com/hfernandes/tinybasic/generated -package com.hfernandes.tinybasic.generated
 

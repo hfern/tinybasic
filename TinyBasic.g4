@@ -1,6 +1,8 @@
 grammar TinyBasic;
 
-line: 
+program: line*;
+
+line:
         number statement CR
     |   statement CR;
 
@@ -17,16 +19,37 @@ statement:
     |   RUN
     |   END;
 
+EQUAL : '=' ;
+COMMA : ',' ;
+ADD : '+' ;
+SUB : '-' ;
+MUL : '*' ;
+DIV : '/' ;
+LPAREN : '(' ;
+RPAREN : ')' ;
 
-exprlist: (STRING|expression) (',' (STRING|expression) )*;
+PRINT: 'PRINT';
+IF: 'IF';
+THEN: 'THEN';
+GOTO: 'GOTO';
+INPUT: 'INPUT';
+LET: 'LET';
+GOSUB: 'GOSUB';
+RETURN: 'RETURN';
+CLEAR: 'CLEAR';
+LIST: 'LIST';
+RUN: 'RUN';
+END: 'END';
 
-varlist: VAR (',' VAR)*;
+exprlist: (STRING|expression) (COMMA (STRING|expression) )*;
 
-expression: ('+'|'-'|) term (('+'|'-') term)*;
+varlist: VAR (COMMA VAR)*;
 
-term: factor (('*'|'/') factor)*;
+expression: (ADD|SUB|) term ((ADD | SUB) term)*;
 
-factor: VAR | number | '(' expression ')';
+term: factor ((MUL|DIV) factor)*;
+
+factor: VAR | number | LPAREN expression RPAREN;
 
 VAR: [A-Z]+;
 
@@ -35,4 +58,6 @@ number: DIGIT DIGIT*;
 DIGIT: [0-9];
 CR: [\r?\n]+;
 STRING: '"' [^"]* '"';
-RELOP: '<' ('>'|'='|) | '>' ('<'|'='|) | '=';
+RELOP: '<' ('>'|EQUAL|) | '>' ('<'|EQUAL|) | EQUAL;
+
+WS : (' ' | '\t')+ -> channel(HIDDEN);
