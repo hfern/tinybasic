@@ -19,7 +19,7 @@ public class TinyBasicParser extends Parser {
 	public static final int
 		EQUAL=1, COMMA=2, ADD=3, SUB=4, MUL=5, DIV=6, LPAREN=7, RPAREN=8, PRINT=9, 
 		IF=10, THEN=11, GOTO=12, INPUT=13, LET=14, GOSUB=15, RETURN=16, CLEAR=17, 
-		LIST=18, RUN=19, END=20, VAR=21, DIGIT=22, CR=23, STRING=24, RELOP=25, 
+		LIST=18, RUN=19, END=20, VAR=21, DIGIT=22, CR=23, RELOP=24, STRING=25, 
 		WS=26;
 	public static final int
 		RULE_program = 0, RULE_line = 1, RULE_statement = 2, RULE_exprlist = 3, 
@@ -38,7 +38,7 @@ public class TinyBasicParser extends Parser {
 	private static final String[] _SYMBOLIC_NAMES = {
 		null, "EQUAL", "COMMA", "ADD", "SUB", "MUL", "DIV", "LPAREN", "RPAREN", 
 		"PRINT", "IF", "THEN", "GOTO", "INPUT", "LET", "GOSUB", "RETURN", "CLEAR", 
-		"LIST", "RUN", "END", "VAR", "DIGIT", "CR", "STRING", "RELOP", "WS"
+		"LIST", "RUN", "END", "VAR", "DIGIT", "CR", "RELOP", "STRING", "WS"
 	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
@@ -868,13 +868,13 @@ public class TinyBasicParser extends Parser {
 		"\27\25\3\2\2\2\27\30\3\2\2\2\30\3\3\2\2\2\31\27\3\2\2\2\32\33\5\22\n\2"+
 		"\33\34\5\6\4\2\34\35\7\31\2\2\35\"\3\2\2\2\36\37\5\6\4\2\37 \7\31\2\2"+
 		" \"\3\2\2\2!\32\3\2\2\2!\36\3\2\2\2\"\5\3\2\2\2#$\7\13\2\2$<\5\b\5\2%"+
-		"&\7\f\2\2&\'\5\f\7\2\'(\7\33\2\2()\5\f\7\2)*\7\r\2\2*+\5\6\4\2+<\3\2\2"+
+		"&\7\f\2\2&\'\5\f\7\2\'(\7\32\2\2()\5\f\7\2)*\7\r\2\2*+\5\6\4\2+<\3\2\2"+
 		"\2,-\7\16\2\2-<\5\f\7\2./\7\17\2\2/<\5\n\6\2\60\61\7\20\2\2\61\62\7\27"+
 		"\2\2\62\63\7\3\2\2\63<\5\f\7\2\64\65\7\21\2\2\65<\5\f\7\2\66<\7\22\2\2"+
 		"\67<\7\23\2\28<\7\24\2\29<\7\25\2\2:<\7\26\2\2;#\3\2\2\2;%\3\2\2\2;,\3"+
 		"\2\2\2;.\3\2\2\2;\60\3\2\2\2;\64\3\2\2\2;\66\3\2\2\2;\67\3\2\2\2;8\3\2"+
-		"\2\2;9\3\2\2\2;:\3\2\2\2<\7\3\2\2\2=@\7\32\2\2>@\5\f\7\2?=\3\2\2\2?>\3"+
-		"\2\2\2@H\3\2\2\2AD\7\4\2\2BE\7\32\2\2CE\5\f\7\2DB\3\2\2\2DC\3\2\2\2EG"+
+		"\2\2;9\3\2\2\2;:\3\2\2\2<\7\3\2\2\2=@\7\33\2\2>@\5\f\7\2?=\3\2\2\2?>\3"+
+		"\2\2\2@H\3\2\2\2AD\7\4\2\2BE\7\33\2\2CE\5\f\7\2DB\3\2\2\2DC\3\2\2\2EG"+
 		"\3\2\2\2FA\3\2\2\2GJ\3\2\2\2HF\3\2\2\2HI\3\2\2\2I\t\3\2\2\2JH\3\2\2\2"+
 		"KP\7\27\2\2LM\7\4\2\2MO\7\27\2\2NL\3\2\2\2OR\3\2\2\2PN\3\2\2\2PQ\3\2\2"+
 		"\2Q\13\3\2\2\2RP\3\2\2\2SW\7\5\2\2TW\7\6\2\2UW\3\2\2\2VS\3\2\2\2VT\3\2"+

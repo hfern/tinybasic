@@ -57,7 +57,10 @@ number: DIGIT DIGIT*;
 
 DIGIT: [0-9];
 CR: [\r?\n]+;
-STRING: '"' [^"]* '"';
 RELOP: '<' ('>'|EQUAL|) | '>' ('<'|EQUAL|) | EQUAL;
+
+fragment ESCAPED_QUOTE : '\\"';
+STRING: '"' ( ESCAPED_QUOTE | ~('\n'|'\r') )*? '"';
+
 
 WS : (' ' | '\t')+ -> channel(HIDDEN);
