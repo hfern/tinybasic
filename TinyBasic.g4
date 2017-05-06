@@ -63,4 +63,5 @@ fragment ESCAPED_QUOTE : '\\"';
 STRING: '"' ( ESCAPED_QUOTE | ~('\n'|'\r') )*? '"';
 
 
+// Handle whitespace, annoying!
 WS : (' ' | '\t')+ -> channel(HIDDEN);
