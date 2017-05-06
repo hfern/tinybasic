@@ -11,14 +11,20 @@ import java.util.HashMap;
 public class ProgramState {
 
     // Map of variable name to the variable value.
-    HashMap<String, Variable> varMap;
+    public HashMap<String, Variable> varMap;
 
     // Map of programmer-tagged "line-number" to the index into the stmt list.
-    HashMap<String, Integer> lineMap;
+    public HashMap<String, Integer> lineMap;
 
     // Cond-Stack...?
     // TODO(hunter): Implement this.
 
     // Stmt index to run next.
-    Integer pc = null;
+    public Integer pc;
+
+    ProgramState() {
+        varMap = new HashMap<String, Variable>();
+        lineMap = new HashMap<String, Integer>();
+        pc = 0;
+    }
 }

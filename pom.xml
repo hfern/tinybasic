@@ -15,6 +15,14 @@
                     <target>1.6</target>
                 </configuration>
             </plugin>
+            <plugin>
+                <groupId>junit</groupId>
+                <artifactId>junit</artifactId>
+                <configuration>
+                    <source>4.12</source>
+                    <target>4.12</target>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
     <packaging>jar</packaging>
@@ -27,6 +35,11 @@
             <groupId>org.antlr</groupId>
             <artifactId>antlr4-runtime</artifactId>
             <version>4.7</version>
+        </dependency>
+        <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-api</artifactId>
+            <version>RELEASE</version>
         </dependency>
     </dependencies>
 </project>
