@@ -24,6 +24,7 @@ CR=23
 RELOP=24
 STRING=25
 WS=26
+COMMENT=27
 '='=1
 ','=2
 '+'=3

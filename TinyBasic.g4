@@ -65,3 +65,4 @@ STRING: '"' ( ESCAPED_QUOTE | ~('\n'|'\r') )*? '"';
 
 // Handle whitespace, annoying!
 WS : (' ' | '\t')+ -> channel(HIDDEN);
+COMMENT: '//' ~('\r' | '\n')* -> channel(HIDDEN);

@@ -20,7 +20,7 @@ public class TinyBasicParser extends Parser {
 		EQUAL=1, COMMA=2, ADD=3, SUB=4, MUL=5, DIV=6, LPAREN=7, RPAREN=8, PRINT=9, 
 		IF=10, THEN=11, GOTO=12, INPUT=13, LET=14, GOSUB=15, RETURN=16, CLEAR=17, 
 		LIST=18, RUN=19, END=20, VAR=21, DIGIT=22, CR=23, RELOP=24, STRING=25, 
-		WS=26;
+		WS=26, COMMENT=27;
 	public static final int
 		RULE_program = 0, RULE_line = 1, RULE_statement = 2, RULE_exprlist = 3, 
 		RULE_varlist = 4, RULE_expression = 5, RULE_term = 6, RULE_factor = 7, 
@@ -38,7 +38,7 @@ public class TinyBasicParser extends Parser {
 	private static final String[] _SYMBOLIC_NAMES = {
 		null, "EQUAL", "COMMA", "ADD", "SUB", "MUL", "DIV", "LPAREN", "RPAREN", 
 		"PRINT", "IF", "THEN", "GOTO", "INPUT", "LET", "GOSUB", "RETURN", "CLEAR", 
-		"LIST", "RUN", "END", "VAR", "DIGIT", "CR", "RELOP", "STRING", "WS"
+		"LIST", "RUN", "END", "VAR", "DIGIT", "CR", "RELOP", "STRING", "WS", "COMMENT"
 	};
 	public static final Vocabulary VOCABULARY = new VocabularyImpl(_LITERAL_NAMES, _SYMBOLIC_NAMES);
 
@@ -854,7 +854,7 @@ public class TinyBasicParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\34x\4\2\t\2\4\3\t"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\35x\4\2\t\2\4\3\t"+
 		"\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\3\2\7\2\26"+
 		"\n\2\f\2\16\2\31\13\2\3\3\3\3\3\3\3\3\3\3\3\3\3\3\5\3\"\n\3\3\4\3\4\3"+
 		"\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4"+
