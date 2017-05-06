@@ -1,6 +1,6 @@
 package com.hfernandes.tinybasic.runtime;
 
-import com.hfernandes.tinybasic.runtime.vars.Variable;
+import com.hfernandes.tinybasic.runtime.vals.Value;
 
 import java.util.HashMap;
 
@@ -11,7 +11,7 @@ import java.util.HashMap;
 public class ProgramState {
 
     // Map of variable name to the variable value.
-    public HashMap<String, Variable> varMap;
+    public HashMap<String, Value> varMap;
 
     // Map of programmer-tagged "line-number" to the index into the stmt list.
     public HashMap<String, Integer> lineMap;
@@ -22,8 +22,8 @@ public class ProgramState {
     // Stmt index to run next.
     public Integer pc;
 
-    ProgramState() {
-        varMap = new HashMap<String, Variable>();
+    public ProgramState() {
+        varMap = new HashMap<String, Value>();
         lineMap = new HashMap<String, Integer>();
         pc = 0;
     }

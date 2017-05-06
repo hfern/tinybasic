@@ -1,4 +1,4 @@
-package com.hfernandes.tinybasic.runtime.evaluator;
+package com.hfernandes.tinybasic.runtime.evaluators;
 
 public class PrintEvaluator {
     public int addOne(int b) {
