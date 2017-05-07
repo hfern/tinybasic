@@ -93,6 +93,12 @@ public class ExprEvaluatorTest {
     }
 
     @Test
+    void test_term_evals_multiplication_multi() throws Exception {
+        Value v = ExprEvaluator.evaluateTerm(new ProgramState(), parseTerm("3 * 10 * 2"));
+        assertEquals(60, v.val.longValue());
+    }
+
+    @Test
     void test_term_evals_division() throws Exception {
         Value v = ExprEvaluator.evaluateTerm(new ProgramState(), parseTerm("10 / 3"));
         assertEquals(3, v.val.longValue());
