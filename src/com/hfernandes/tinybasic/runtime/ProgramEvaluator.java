@@ -41,6 +41,11 @@ public class ProgramEvaluator {
         for (int i = 0; i < programContext.getChildCount(); i++) {
             TinyBasicParser.LineContext line = (TinyBasicParser.LineContext) programContext.getChild(i);
 
+            // empty newline? Skip
+            if (line.getChildCount() > 0 && TokenRecognizer.terminalIs(line.getChild(0), TinyBasicLexer.CR)) {
+                continue;
+            }
+
             if (line.getChildCount() > 0 && line.getChild(0) instanceof TinyBasicParser.NumberContext) {
                 TinyBasicParser.StatementContext statement = (TinyBasicParser.StatementContext) line.getChild(1);
                 TinyBasicParser.NumberContext lineNumberNode = (TinyBasicParser.NumberContext) line.getChild(0);

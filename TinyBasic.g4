@@ -4,10 +4,11 @@ program: line*;
 
 line:
         number statement CR
-    |   statement CR;
+    |   statement CR
+    |   CR;
 
 statement:
-        PRINT exprlist
+        PRINT exprlist // I kind of want to let user's use the old python , at the end to suppress Newline
     |   IF expression (RELOP | '=') expression THEN statement
     |   GOTO expression
     |   INPUT varlist
