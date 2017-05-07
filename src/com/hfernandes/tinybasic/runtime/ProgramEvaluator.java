@@ -14,6 +14,7 @@ import java.util.HashMap;
 public class ProgramEvaluator {
     public ProgramState state;
 
+    public TinyBasicParser.ProgramContext programContext;
     public ArrayList<TinyBasicParser.StatementContext> statementLines;
 
     protected HashMap<Integer, Evaluator> statementHandlers;
@@ -29,12 +30,12 @@ public class ProgramEvaluator {
         statementHandlers.put(TinyBasicLexer.LET, setPE(new LetEvaluator()));
         // TODO(hunter): handle gosub
         statementHandlers.put(TinyBasicLexer.CLEAR, setPE(new ClearEvaluator()));
-        // TODO(hunter): handle list
-        statementHandlers.put(TinyBasicLexer.RUN, setPE(new RunEvaluator()));
+        statementHandlers.put(TinyBasicLexer.LIST, setPE(new ListEvaluator()));        statementHandlers.put(TinyBasicLexer.RUN, setPE(new RunEvaluator()));
         statementHandlers.put(TinyBasicLexer.END, setPE(new EndEvaluator()));
     }
 
     public void setProgram(TinyBasicParser.ProgramContext programContext) {
+        this.programContext = programContext;
         statementLines = new ArrayList<TinyBasicParser.StatementContext>();
         for (int i = 0; i < programContext.getChildCount(); i++) {
             TinyBasicParser.LineContext line = (TinyBasicParser.LineContext) programContext.getChild(i);
