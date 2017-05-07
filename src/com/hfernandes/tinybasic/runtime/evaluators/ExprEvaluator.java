@@ -16,14 +16,49 @@ import org.antlr.v4.runtime.tree.TerminalNode;
 import org.antlr.v4.runtime.tree.Tree;
 import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 // Evaluates an Expr
 public class ExprEvaluator {
     public static Value evaluate(ProgramState state, ExpressionContext expr) throws TinyBasicException {
-        // case where just a simple number
+        boolean negate = false;
+        boolean skipFirst = false;
 
-        return new Value();
+        if (TokenRecognizer.terminalIs(expr.getChild(0), TinyBasicLexer.SUB)) {
+            negate = true;
+            skipFirst = true;
+        } else if (TokenRecognizer.terminalIs(expr.getChild(0), TinyBasicLexer.ADD)) {
+            skipFirst = true;
+        }
+
+        ArrayList<TermContext> terms = TreeFilter.filter(expr, t -> t instanceof TermContext);
+        ArrayList<TerminalNode> ops = TreeFilter.filter(expr, t -> TokenRecognizer.terminalIs(t, TinyBasicLexer.SUB)
+                || TokenRecognizer.terminalIs(t, TinyBasicLexer.ADD));
+
+        if (skipFirst) {
+            ops.remove(0);
+        }
+
+        Value value = evaluateTerm(state, terms.get(0));
+
+        for (int i = 0; i < ops.size(); i++) {
+            Value value2 = evaluateTerm(state, terms.get(i + 1));
+
+            if (TokenRecognizer.terminalIs(ops.get(i), TinyBasicLexer.ADD)) {
+                value = new Value(value.val + value2.val);
+            } else if (TokenRecognizer.terminalIs(ops.get(i), TinyBasicLexer.SUB)) {
+                value = new Value(value.val - value2.val);
+            } else {
+                throw new GrammarViolatedException();
+            }
+        }
+
+        if (negate) {
+            value = new Value(value.val * -1);
+        }
+
+        return value;
     }
 
     public static Value evaluateTerm(ProgramState state, TermContext term) throws TinyBasicException {

@@ -54,25 +54,55 @@ public class ExprEvaluatorTest {
         return term;
     }
 
-//    @Test
+    @Test
     void test_simple_numbers() throws Exception {
         Value v = ExprEvaluator.evaluate(new ProgramState(), parseExpr("42"));
         assertEquals(v.val.longValue(), 42);
     }
 
-//    @Test
+    @Test
     void test_negative_numbers() throws Exception {
         Value v = ExprEvaluator.evaluate(new ProgramState(), parseExpr("-3"));
         assertEquals(v.val.longValue(), -3);
     }
 
-//    @Test
+    @Test
+    void test_adding() throws Exception {
+        Value v = ExprEvaluator.evaluate(new ProgramState(), parseExpr("20 + 5"));
+        assertEquals(25, v.val.longValue());
+    }
+
+    @Test
+    void test_adding_multi() throws Exception {
+        Value v = ExprEvaluator.evaluate(new ProgramState(), parseExpr("20 + 5 + 16"));
+        assertEquals(41, v.val.longValue());
+    }
+
+    @Test
+    void test_subtracting() throws Exception {
+        Value v = ExprEvaluator.evaluate(new ProgramState(), parseExpr("20 - 5"));
+        assertEquals(15, v.val.longValue());
+    }
+
+    @Test
+    void test_subtracting_multi() throws Exception {
+        Value v = ExprEvaluator.evaluate(new ProgramState(), parseExpr("20 - 5 - 4"));
+        assertEquals(11, v.val.longValue());
+    }
+
+    @Test
+    void test_subtracting_groupable() throws Exception {
+        Value v = ExprEvaluator.evaluate(new ProgramState(), parseExpr("20 - (5 - 4)"));
+        assertEquals(19, v.val.longValue());
+    }
+
+    @Test
     void test_simple_factor() throws Exception {
         Value v = ExprEvaluator.evaluateFactor(new ProgramState(), parseFactor("9"));
         assertEquals(v.val.longValue(), 9);
     }
 
-//    @Test
+    @Test
     void test_var_factor() throws Exception {
         ProgramState ps = new ProgramState();
         ps.varMap.put("X", new Value(666));
@@ -80,7 +110,7 @@ public class ExprEvaluatorTest {
         assertEquals(666, v.val.longValue());
     }
 
-//    @Test
+    @Test
     void test_factor_parens() throws Exception {
         Value v = ExprEvaluator.evaluateFactor(new ProgramState(), parseFactor("( 10 )"));
         assertEquals(v.val.longValue(), 10);
