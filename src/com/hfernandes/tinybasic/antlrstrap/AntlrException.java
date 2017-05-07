@@ -9,4 +9,13 @@ public class AntlrException extends Exception {
     public AntlrException(List<AntlrError> errors) {
         this.errors = errors;
     }
+
+    @Override
+    public String getMessage() {
+        String message = "There were errors encountered parsing the program:\n";
+        for (AntlrError error : errors) {
+            message += "> " + error + "\n";
+        }
+        return message;
+    }
 }

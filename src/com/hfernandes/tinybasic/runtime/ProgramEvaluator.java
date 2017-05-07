@@ -24,7 +24,7 @@ public class ProgramEvaluator {
 
         statementHandlers = new HashMap<>();
         statementHandlers.put(TinyBasicLexer.PRINT, setPE(new PrintEvaluator()));
-        // TODO(hunter): handle if
+        statementHandlers.put(TinyBasicLexer.IF, setPE(new IfEvaluator()));
         statementHandlers.put(TinyBasicLexer.GOTO, setPE(new GotoEvaluator()));
         statementHandlers.put(TinyBasicLexer.INPUT, setPE(new InputEvaluator()));
         statementHandlers.put(TinyBasicLexer.LET, setPE(new LetEvaluator()));
@@ -72,7 +72,7 @@ public class ProgramEvaluator {
         }
     }
 
-    protected boolean runStatement(TinyBasicParser.StatementContext stmt) throws TinyBasicException {
+    public boolean runStatement(TinyBasicParser.StatementContext stmt) throws TinyBasicException {
         if (!(stmt.getChild(0) instanceof TerminalNode)) {
             throw new RuntimeException("Critical: Statement expected first item to be stmt type token, is not!");
         }
