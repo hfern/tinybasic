@@ -6,6 +6,7 @@ import com.hfernandes.tinybasic.runtime.vals.Value;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.HashMap;
+import java.util.Stack;
 
 // This represents the state of the program, including
 //  - Variables
@@ -31,6 +32,9 @@ public class ProgramState {
     // The standard output stream to write to
     public OutputStream os;
 
+    // stack of return PCs for use in functions calls
+    public Stack<Integer> retStack;
+
     public ProgramState() {
         varMap = new HashMap<String, Value>();
         lineMap = new HashMap<String, Integer>();
@@ -38,6 +42,7 @@ public class ProgramState {
 
         is = System.in;
         os = System.out;
+        retStack = new Stack<>();
     }
 
     public Value getVarVal(String varName) throws UnsetVariableException {
