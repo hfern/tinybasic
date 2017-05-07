@@ -28,7 +28,7 @@ public class ProgramEvaluator {
         // TODO(hunter): handle input
         statementHandlers.put(TinyBasicLexer.LET, setPE(new LetEvaluator()));
         // TODO(hunter): handle gosub
-        // TODO(hunter): handle clear
+        statementHandlers.put(TinyBasicLexer.CLEAR, setPE(new ClearEvaluator()));
         // TODO(hunter): handle list
         statementHandlers.put(TinyBasicLexer.RUN, setPE(new RunEvaluator()));
         statementHandlers.put(TinyBasicLexer.END, setPE(new EndEvaluator()));

@@ -1,4 +1,4 @@
-package test.com.hfernandes.tinybasic.runtime.evaluator;
+package test.com.hfernandes.tinybasic.runtime.evaluators;
 
 import com.hfernandes.tinybasic.generated.TinyBasicParser;
 import org.junit.jupiter.api.Test;
