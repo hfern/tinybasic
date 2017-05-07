@@ -61,9 +61,5 @@ public class Main {
             e.printStackTrace();
             return;
         }
-
-        System.out.println("Got to here in this!");
-
-
     }
 }
