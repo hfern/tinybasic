@@ -1,5 +1,6 @@
 package com.hfernandes.tinybasic.runtime;
 
+import com.hfernandes.tinybasic.runtime.exceptions.UnsetVariableException;
 import com.hfernandes.tinybasic.runtime.vals.Value;
 
 import java.util.HashMap;
@@ -26,5 +27,14 @@ public class ProgramState {
         varMap = new HashMap<String, Value>();
         lineMap = new HashMap<String, Integer>();
         pc = 0;
+    }
+
+    public Value getVarVal(String varName) throws UnsetVariableException {
+        Value val = varMap.get(varName);
+        if (val == null) {
+            throw new UnsetVariableException(varName);
+        }
+
+        return val;
     }
 }
