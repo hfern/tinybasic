@@ -43,7 +43,7 @@ public class Main {
             System.out.println("That file doesn't exist!");
             return;
         } catch (AntlrException e) {
-            System.out.println();
+            System.out.println(e.getParseErrorMessage());
             return;
         }
 

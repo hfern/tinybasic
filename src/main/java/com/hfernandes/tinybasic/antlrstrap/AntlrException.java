@@ -12,6 +12,10 @@ public class AntlrException extends Exception {
 
     @Override
     public String getMessage() {
+        return getParseErrorMessage();
+    }
+
+    public String getParseErrorMessage() {
         String message = "There were errors encountered parsing the program:\n";
         for (AntlrError error : errors) {
             message += "> " + error + "\n";
