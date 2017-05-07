@@ -3,13 +3,12 @@ package com.hfernandes.tinybasic.runtime;
 import com.hfernandes.tinybasic.generated.TinyBasicLexer;
 import com.hfernandes.tinybasic.generated.TinyBasicParser;
 import com.hfernandes.tinybasic.runtime.evaluators.Evaluator;
+import com.hfernandes.tinybasic.runtime.evaluators.LetEvaluator;
 import com.hfernandes.tinybasic.runtime.evaluators.PrintEvaluator;
 import com.hfernandes.tinybasic.runtime.exceptions.GrammarViolatedException;
 import com.hfernandes.tinybasic.runtime.exceptions.TinyBasicException;
 import com.hfernandes.tinybasic.runtime.utils.TokenRecognizer;
-import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.TerminalNode;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -26,6 +25,15 @@ public class ProgramEvaluator {
 
         statementHandlers = new HashMap<>();
         statementHandlers.put(TinyBasicLexer.PRINT, setPE(new PrintEvaluator()));
+        // TODO(hunter): handle if
+        // TODO(hunter): handle goto
+        // TODO(hunter): handle input
+        statementHandlers.put(TinyBasicLexer.LET, setPE(new LetEvaluator()));
+        // TODO(hunter): handle gosub
+        // TODO(hunter): handle clear
+        // TODO(hunter): handle list
+        // TODO(hunter): handle run
+        // TODO(hunter): handle end
     }
 
     public void setProgram(TinyBasicParser.ProgramContext programContext) {
