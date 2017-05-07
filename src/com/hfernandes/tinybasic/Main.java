@@ -16,9 +16,26 @@ import java.io.IOException;
 public class Main {
 
     public static void main(String[] args) {
-        ParseTree tree;
+        if (args.length < 1) {
+            System.out.println("Please specify file to run.");
+            usage();
+            return;
+        }
 
-        String filename = "fixtures/simple-print.basic";
+        run(args[0]);
+    }
+
+    public static void usage() {
+        System.out.println("--------------------------------");
+        System.out.println("    TinyBasic Implementation    ");
+        System.out.println("      By Hunter Fernandes");
+        System.out.println("--------------------------------");
+        System.out.println("Usage:");
+        System.out.println("   tinybasic <FILENAME>");
+    }
+
+    public static void run(String filename) {
+        ParseTree tree;
 
         try {
             tree = ProgramParser.getParseTree(filename);
@@ -26,10 +43,7 @@ public class Main {
             System.out.println("That file doesn't exist!");
             return;
         } catch (AntlrException e) {
-            System.out.println("There were errors encountered parsing the program:");
-            for (AntlrError error : e.errors) {
-                System.out.println("> " + error);
-            }
+            System.out.println();
             return;
         }
 
@@ -41,7 +55,7 @@ public class Main {
                 // pass :)
             }
         } catch (StopExecutionException e) {
-            System.out.println("(The program exited with status " + e.statusCode +")");
+            System.out.println("(The program explicitly exited with status " + e.statusCode +")");
         } catch (TinyBasicException e) {
             System.out.println("An error occurred during execution: " + e);
             e.printStackTrace();
