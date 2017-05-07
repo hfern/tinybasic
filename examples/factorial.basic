@@ -10,7 +10,7 @@
     RETURN
 
 500 PRINT "Factorial Program :)"
-    PRINT "Enter the number to factorial: "
+    PRINT "Enter the number to factorial: ",
     INPUT X
     LET Z=X
     GOSUB 100

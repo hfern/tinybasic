@@ -18,6 +18,7 @@ public class PrintEvaluator extends Evaluator {
     public boolean evaluate(TinyBasicParser.StatementContext stmt) throws TinyBasicException {
         PrintStream stream = new PrintStream(pe.state.os);
         Tree exprList = stmt.getChild(1);
+
         for (int i = 0; i < exprList.getChildCount(); i++) {
             Tree printable = exprList.getChild(i);
 
@@ -29,7 +30,13 @@ public class PrintEvaluator extends Evaluator {
             }
         }
 
-        stream.print("\r\n");
+        // if last child in statement chilren was , then suppress final \r\n output
+        if (TokenRecognizer.terminalIs(stmt.getChild(stmt.getChildCount() - 1), TinyBasicLexer.COMMA)) {
+            // dont print :)
+        } else {
+            stream.print("\r\n");
+
+        }
         return true;
     }
 }

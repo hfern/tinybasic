@@ -6,7 +6,8 @@ build:
 	$(MVN) package
 
 grammar:
-	$(ANTLR4) TinyBasic.g4 -o src/com/hfernandes/tinybasic/generated -package com.hfernandes.tinybasic.generated
+	$(ANTLR4) TinyBasic.g4 -o src/main/java/com/hfernandes/tinybasic/generated \
+	    -package com.hfernandes.tinybasic.generated
 
 run-example:
 	java -jar $(EXECJAR) fixtures/echo1.basic

@@ -231,6 +231,7 @@ public class TinyBasicParser extends Parser {
 		public ExprlistContext exprlist() {
 			return getRuleContext(ExprlistContext.class,0);
 		}
+		public TerminalNode COMMA() { return getToken(TinyBasicParser.COMMA, 0); }
 		public TerminalNode IF() { return getToken(TinyBasicParser.IF, 0); }
 		public List<ExpressionContext> expression() {
 			return getRuleContexts(ExpressionContext.class);
@@ -275,7 +276,7 @@ public class TinyBasicParser extends Parser {
 		enterRule(_localctx, 4, RULE_statement);
 		int _la;
 		try {
-			setState(58);
+			setState(61);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case PRINT:
@@ -285,16 +286,26 @@ public class TinyBasicParser extends Parser {
 				match(PRINT);
 				setState(35);
 				exprlist();
+				setState(37);
+				_errHandler.sync(this);
+				_la = _input.LA(1);
+				if (_la==COMMA) {
+					{
+					setState(36);
+					match(COMMA);
+					}
+				}
+
 				}
 				break;
 			case IF:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(36);
+				setState(39);
 				match(IF);
-				setState(37);
+				setState(40);
 				expression();
-				setState(38);
+				setState(41);
 				_la = _input.LA(1);
 				if ( !(_la==EQUALS || _la==RELOP) ) {
 				_errHandler.recoverInline(this);
@@ -304,86 +315,86 @@ public class TinyBasicParser extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(39);
+				setState(42);
 				expression();
-				setState(40);
+				setState(43);
 				match(THEN);
-				setState(41);
+				setState(44);
 				statement();
 				}
 				break;
 			case GOTO:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(43);
+				setState(46);
 				match(GOTO);
-				setState(44);
+				setState(47);
 				expression();
 				}
 				break;
 			case INPUT:
 				enterOuterAlt(_localctx, 4);
 				{
-				setState(45);
+				setState(48);
 				match(INPUT);
-				setState(46);
+				setState(49);
 				varlist();
 				}
 				break;
 			case LET:
 				enterOuterAlt(_localctx, 5);
 				{
-				setState(47);
-				match(LET);
-				setState(48);
-				match(VAR);
-				setState(49);
-				match(EQUALS);
 				setState(50);
+				match(LET);
+				setState(51);
+				match(VAR);
+				setState(52);
+				match(EQUALS);
+				setState(53);
 				expression();
 				}
 				break;
 			case GOSUB:
 				enterOuterAlt(_localctx, 6);
 				{
-				setState(51);
+				setState(54);
 				match(GOSUB);
-				setState(52);
+				setState(55);
 				expression();
 				}
 				break;
 			case RETURN:
 				enterOuterAlt(_localctx, 7);
 				{
-				setState(53);
+				setState(56);
 				match(RETURN);
 				}
 				break;
 			case CLEAR:
 				enterOuterAlt(_localctx, 8);
 				{
-				setState(54);
+				setState(57);
 				match(CLEAR);
 				}
 				break;
 			case LIST:
 				enterOuterAlt(_localctx, 9);
 				{
-				setState(55);
+				setState(58);
 				match(LIST);
 				}
 				break;
 			case RUN:
 				enterOuterAlt(_localctx, 10);
 				{
-				setState(56);
+				setState(59);
 				match(RUN);
 				}
 				break;
 			case END:
 				enterOuterAlt(_localctx, 11);
 				{
-				setState(57);
+				setState(60);
 				match(END);
 				}
 				break;
@@ -434,16 +445,16 @@ public class TinyBasicParser extends Parser {
 	public final ExprlistContext exprlist() throws RecognitionException {
 		ExprlistContext _localctx = new ExprlistContext(_ctx, getState());
 		enterRule(_localctx, 6, RULE_exprlist);
-		int _la;
 		try {
+			int _alt;
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(62);
+			setState(65);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case STRING:
 				{
-				setState(60);
+				setState(63);
 				match(STRING);
 				}
 				break;
@@ -453,48 +464,50 @@ public class TinyBasicParser extends Parser {
 			case SUB:
 			case LPAREN:
 				{
-				setState(61);
+				setState(64);
 				expression();
 				}
 				break;
 			default:
 				throw new NoViableAltException(this);
 			}
-			setState(71);
+			setState(74);
 			_errHandler.sync(this);
-			_la = _input.LA(1);
-			while (_la==COMMA) {
-				{
-				{
-				setState(64);
-				match(COMMA);
-				setState(67);
-				_errHandler.sync(this);
-				switch (_input.LA(1)) {
-				case STRING:
+			_alt = getInterpreter().adaptivePredict(_input,6,_ctx);
+			while ( _alt!=2 && _alt!=org.antlr.v4.runtime.atn.ATN.INVALID_ALT_NUMBER ) {
+				if ( _alt==1 ) {
 					{
-					setState(65);
-					match(STRING);
-					}
-					break;
-				case VAR:
-				case DIGIT:
-				case ADD:
-				case SUB:
-				case LPAREN:
 					{
-					setState(66);
-					expression();
+					setState(67);
+					match(COMMA);
+					setState(70);
+					_errHandler.sync(this);
+					switch (_input.LA(1)) {
+					case STRING:
+						{
+						setState(68);
+						match(STRING);
+						}
+						break;
+					case VAR:
+					case DIGIT:
+					case ADD:
+					case SUB:
+					case LPAREN:
+						{
+						setState(69);
+						expression();
+						}
+						break;
+					default:
+						throw new NoViableAltException(this);
 					}
-					break;
-				default:
-					throw new NoViableAltException(this);
+					}
+					} 
 				}
-				}
-				}
-				setState(73);
+				setState(76);
 				_errHandler.sync(this);
-				_la = _input.LA(1);
+				_alt = getInterpreter().adaptivePredict(_input,6,_ctx);
 			}
 			}
 		}
@@ -539,21 +552,21 @@ public class TinyBasicParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(74);
+			setState(77);
 			match(VAR);
-			setState(79);
+			setState(82);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==COMMA) {
 				{
 				{
-				setState(75);
+				setState(78);
 				match(COMMA);
-				setState(76);
+				setState(79);
 				match(VAR);
 				}
 				}
-				setState(81);
+				setState(84);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -606,18 +619,18 @@ public class TinyBasicParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(85);
+			setState(88);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case ADD:
 				{
-				setState(82);
+				setState(85);
 				match(ADD);
 				}
 				break;
 			case SUB:
 				{
-				setState(83);
+				setState(86);
 				match(SUB);
 				}
 				break;
@@ -630,15 +643,15 @@ public class TinyBasicParser extends Parser {
 			default:
 				throw new NoViableAltException(this);
 			}
-			setState(87);
+			setState(90);
 			term();
-			setState(92);
+			setState(95);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==ADD || _la==SUB) {
 				{
 				{
-				setState(88);
+				setState(91);
 				_la = _input.LA(1);
 				if ( !(_la==ADD || _la==SUB) ) {
 				_errHandler.recoverInline(this);
@@ -648,11 +661,11 @@ public class TinyBasicParser extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(89);
+				setState(92);
 				term();
 				}
 				}
-				setState(94);
+				setState(97);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -705,15 +718,15 @@ public class TinyBasicParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(95);
+			setState(98);
 			factor();
-			setState(100);
+			setState(103);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==MUL || _la==DIV) {
 				{
 				{
-				setState(96);
+				setState(99);
 				_la = _input.LA(1);
 				if ( !(_la==MUL || _la==DIV) ) {
 				_errHandler.recoverInline(this);
@@ -723,11 +736,11 @@ public class TinyBasicParser extends Parser {
 					_errHandler.reportMatch(this);
 					consume();
 				}
-				setState(97);
+				setState(100);
 				factor();
 				}
 				}
-				setState(102);
+				setState(105);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -772,31 +785,31 @@ public class TinyBasicParser extends Parser {
 		FactorContext _localctx = new FactorContext(_ctx, getState());
 		enterRule(_localctx, 14, RULE_factor);
 		try {
-			setState(109);
+			setState(112);
 			_errHandler.sync(this);
 			switch (_input.LA(1)) {
 			case VAR:
 				enterOuterAlt(_localctx, 1);
 				{
-				setState(103);
+				setState(106);
 				match(VAR);
 				}
 				break;
 			case DIGIT:
 				enterOuterAlt(_localctx, 2);
 				{
-				setState(104);
+				setState(107);
 				number();
 				}
 				break;
 			case LPAREN:
 				enterOuterAlt(_localctx, 3);
 				{
-				setState(105);
+				setState(108);
 				match(LPAREN);
-				setState(106);
+				setState(109);
 				expression();
-				setState(107);
+				setState(110);
 				match(RPAREN);
 				}
 				break;
@@ -841,19 +854,19 @@ public class TinyBasicParser extends Parser {
 		try {
 			enterOuterAlt(_localctx, 1);
 			{
-			setState(111);
+			setState(114);
 			match(DIGIT);
-			setState(115);
+			setState(118);
 			_errHandler.sync(this);
 			_la = _input.LA(1);
 			while (_la==DIGIT) {
 				{
 				{
-				setState(112);
+				setState(115);
 				match(DIGIT);
 				}
 				}
-				setState(117);
+				setState(120);
 				_errHandler.sync(this);
 				_la = _input.LA(1);
 			}
@@ -871,37 +884,38 @@ public class TinyBasicParser extends Parser {
 	}
 
 	public static final String _serializedATN =
-		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\35y\4\2\t\2\4\3\t"+
+		"\3\u608b\ua72a\u8133\ub9ed\u417c\u3be7\u7786\u5964\3\35|\4\2\t\2\4\3\t"+
 		"\3\4\4\t\4\4\5\t\5\4\6\t\6\4\7\t\7\4\b\t\b\4\t\t\t\4\n\t\n\3\2\7\2\26"+
 		"\n\2\f\2\16\2\31\13\2\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\3\5\3#\n\3\3\4\3\4"+
-		"\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3"+
-		"\4\3\4\3\4\3\4\3\4\5\4=\n\4\3\5\3\5\5\5A\n\5\3\5\3\5\3\5\5\5F\n\5\7\5"+
-		"H\n\5\f\5\16\5K\13\5\3\6\3\6\3\6\7\6P\n\6\f\6\16\6S\13\6\3\7\3\7\3\7\5"+
-		"\7X\n\7\3\7\3\7\3\7\7\7]\n\7\f\7\16\7`\13\7\3\b\3\b\3\b\7\be\n\b\f\b\16"+
-		"\bh\13\b\3\t\3\t\3\t\3\t\3\t\3\t\5\tp\n\t\3\n\3\n\7\nt\n\n\f\n\16\nw\13"+
-		"\n\3\n\2\2\13\2\4\6\b\n\f\16\20\22\2\5\4\2\23\23\33\33\3\2\25\26\3\2\27"+
-		"\30\2\u0087\2\27\3\2\2\2\4\"\3\2\2\2\6<\3\2\2\2\b@\3\2\2\2\nL\3\2\2\2"+
-		"\fW\3\2\2\2\16a\3\2\2\2\20o\3\2\2\2\22q\3\2\2\2\24\26\5\4\3\2\25\24\3"+
-		"\2\2\2\26\31\3\2\2\2\27\25\3\2\2\2\27\30\3\2\2\2\30\3\3\2\2\2\31\27\3"+
-		"\2\2\2\32\33\5\22\n\2\33\34\5\6\4\2\34\35\7\21\2\2\35#\3\2\2\2\36\37\5"+
-		"\6\4\2\37 \7\21\2\2 #\3\2\2\2!#\7\21\2\2\"\32\3\2\2\2\"\36\3\2\2\2\"!"+
-		"\3\2\2\2#\5\3\2\2\2$%\7\3\2\2%=\5\b\5\2&\'\7\4\2\2\'(\5\f\7\2()\t\2\2"+
-		"\2)*\5\f\7\2*+\7\5\2\2+,\5\6\4\2,=\3\2\2\2-.\7\6\2\2.=\5\f\7\2/\60\7\7"+
-		"\2\2\60=\5\n\6\2\61\62\7\b\2\2\62\63\7\17\2\2\63\64\7\23\2\2\64=\5\f\7"+
-		"\2\65\66\7\t\2\2\66=\5\f\7\2\67=\7\n\2\28=\7\13\2\29=\7\f\2\2:=\7\r\2"+
-		"\2;=\7\16\2\2<$\3\2\2\2<&\3\2\2\2<-\3\2\2\2</\3\2\2\2<\61\3\2\2\2<\65"+
-		"\3\2\2\2<\67\3\2\2\2<8\3\2\2\2<9\3\2\2\2<:\3\2\2\2<;\3\2\2\2=\7\3\2\2"+
-		"\2>A\7\22\2\2?A\5\f\7\2@>\3\2\2\2@?\3\2\2\2AI\3\2\2\2BE\7\24\2\2CF\7\22"+
-		"\2\2DF\5\f\7\2EC\3\2\2\2ED\3\2\2\2FH\3\2\2\2GB\3\2\2\2HK\3\2\2\2IG\3\2"+
-		"\2\2IJ\3\2\2\2J\t\3\2\2\2KI\3\2\2\2LQ\7\17\2\2MN\7\24\2\2NP\7\17\2\2O"+
-		"M\3\2\2\2PS\3\2\2\2QO\3\2\2\2QR\3\2\2\2R\13\3\2\2\2SQ\3\2\2\2TX\7\25\2"+
-		"\2UX\7\26\2\2VX\3\2\2\2WT\3\2\2\2WU\3\2\2\2WV\3\2\2\2XY\3\2\2\2Y^\5\16"+
-		"\b\2Z[\t\3\2\2[]\5\16\b\2\\Z\3\2\2\2]`\3\2\2\2^\\\3\2\2\2^_\3\2\2\2_\r"+
-		"\3\2\2\2`^\3\2\2\2af\5\20\t\2bc\t\4\2\2ce\5\20\t\2db\3\2\2\2eh\3\2\2\2"+
-		"fd\3\2\2\2fg\3\2\2\2g\17\3\2\2\2hf\3\2\2\2ip\7\17\2\2jp\5\22\n\2kl\7\31"+
-		"\2\2lm\5\f\7\2mn\7\32\2\2np\3\2\2\2oi\3\2\2\2oj\3\2\2\2ok\3\2\2\2p\21"+
-		"\3\2\2\2qu\7\20\2\2rt\7\20\2\2sr\3\2\2\2tw\3\2\2\2us\3\2\2\2uv\3\2\2\2"+
-		"v\23\3\2\2\2wu\3\2\2\2\16\27\"<@EIQW^fou";
+		"\3\4\5\4(\n\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4"+
+		"\3\4\3\4\3\4\3\4\3\4\3\4\3\4\3\4\5\4@\n\4\3\5\3\5\5\5D\n\5\3\5\3\5\3\5"+
+		"\5\5I\n\5\7\5K\n\5\f\5\16\5N\13\5\3\6\3\6\3\6\7\6S\n\6\f\6\16\6V\13\6"+
+		"\3\7\3\7\3\7\5\7[\n\7\3\7\3\7\3\7\7\7`\n\7\f\7\16\7c\13\7\3\b\3\b\3\b"+
+		"\7\bh\n\b\f\b\16\bk\13\b\3\t\3\t\3\t\3\t\3\t\3\t\5\ts\n\t\3\n\3\n\7\n"+
+		"w\n\n\f\n\16\nz\13\n\3\n\2\2\13\2\4\6\b\n\f\16\20\22\2\5\4\2\23\23\33"+
+		"\33\3\2\25\26\3\2\27\30\2\u008b\2\27\3\2\2\2\4\"\3\2\2\2\6?\3\2\2\2\b"+
+		"C\3\2\2\2\nO\3\2\2\2\fZ\3\2\2\2\16d\3\2\2\2\20r\3\2\2\2\22t\3\2\2\2\24"+
+		"\26\5\4\3\2\25\24\3\2\2\2\26\31\3\2\2\2\27\25\3\2\2\2\27\30\3\2\2\2\30"+
+		"\3\3\2\2\2\31\27\3\2\2\2\32\33\5\22\n\2\33\34\5\6\4\2\34\35\7\21\2\2\35"+
+		"#\3\2\2\2\36\37\5\6\4\2\37 \7\21\2\2 #\3\2\2\2!#\7\21\2\2\"\32\3\2\2\2"+
+		"\"\36\3\2\2\2\"!\3\2\2\2#\5\3\2\2\2$%\7\3\2\2%\'\5\b\5\2&(\7\24\2\2\'"+
+		"&\3\2\2\2\'(\3\2\2\2(@\3\2\2\2)*\7\4\2\2*+\5\f\7\2+,\t\2\2\2,-\5\f\7\2"+
+		"-.\7\5\2\2./\5\6\4\2/@\3\2\2\2\60\61\7\6\2\2\61@\5\f\7\2\62\63\7\7\2\2"+
+		"\63@\5\n\6\2\64\65\7\b\2\2\65\66\7\17\2\2\66\67\7\23\2\2\67@\5\f\7\28"+
+		"9\7\t\2\29@\5\f\7\2:@\7\n\2\2;@\7\13\2\2<@\7\f\2\2=@\7\r\2\2>@\7\16\2"+
+		"\2?$\3\2\2\2?)\3\2\2\2?\60\3\2\2\2?\62\3\2\2\2?\64\3\2\2\2?8\3\2\2\2?"+
+		":\3\2\2\2?;\3\2\2\2?<\3\2\2\2?=\3\2\2\2?>\3\2\2\2@\7\3\2\2\2AD\7\22\2"+
+		"\2BD\5\f\7\2CA\3\2\2\2CB\3\2\2\2DL\3\2\2\2EH\7\24\2\2FI\7\22\2\2GI\5\f"+
+		"\7\2HF\3\2\2\2HG\3\2\2\2IK\3\2\2\2JE\3\2\2\2KN\3\2\2\2LJ\3\2\2\2LM\3\2"+
+		"\2\2M\t\3\2\2\2NL\3\2\2\2OT\7\17\2\2PQ\7\24\2\2QS\7\17\2\2RP\3\2\2\2S"+
+		"V\3\2\2\2TR\3\2\2\2TU\3\2\2\2U\13\3\2\2\2VT\3\2\2\2W[\7\25\2\2X[\7\26"+
+		"\2\2Y[\3\2\2\2ZW\3\2\2\2ZX\3\2\2\2ZY\3\2\2\2[\\\3\2\2\2\\a\5\16\b\2]^"+
+		"\t\3\2\2^`\5\16\b\2_]\3\2\2\2`c\3\2\2\2a_\3\2\2\2ab\3\2\2\2b\r\3\2\2\2"+
+		"ca\3\2\2\2di\5\20\t\2ef\t\4\2\2fh\5\20\t\2ge\3\2\2\2hk\3\2\2\2ig\3\2\2"+
+		"\2ij\3\2\2\2j\17\3\2\2\2ki\3\2\2\2ls\7\17\2\2ms\5\22\n\2no\7\31\2\2op"+
+		"\5\f\7\2pq\7\32\2\2qs\3\2\2\2rl\3\2\2\2rm\3\2\2\2rn\3\2\2\2s\21\3\2\2"+
+		"\2tx\7\20\2\2uw\7\20\2\2vu\3\2\2\2wz\3\2\2\2xv\3\2\2\2xy\3\2\2\2y\23\3"+
+		"\2\2\2zx\3\2\2\2\17\27\"\'?CHLTZairx";
 	public static final ATN _ATN =
 		new ATNDeserializer().deserialize(_serializedATN.toCharArray());
 	static {

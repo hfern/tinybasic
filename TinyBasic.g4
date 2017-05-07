@@ -8,7 +8,7 @@ line:
     |   CR;
 
 statement:
-        PRINT exprlist // I kind of want to let user's use the old python , at the end to suppress Newline
+        PRINT exprlist COMMA?
     |   IF expression (RELOP | '=') expression THEN statement
     |   GOTO expression
     |   INPUT varlist

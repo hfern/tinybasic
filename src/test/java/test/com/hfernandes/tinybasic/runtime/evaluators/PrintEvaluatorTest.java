@@ -27,4 +27,12 @@ class PrintEvaluatorTest extends TestBase {
         runProgram(program);
         assertProgramOutputted("Num: 123\r\n");
     }
+
+    @Test
+    void testPrintTrailingCommaExtension() throws Exception {
+        // Verify PRINT, prevents trailing \r\n from being output
+        TinyBasicParser.ProgramContext program = parseProgramString("PRINT \"Hunter\", \n");
+        runProgram(program);
+        assertProgramOutputted("Hunter");
+    }
 }
