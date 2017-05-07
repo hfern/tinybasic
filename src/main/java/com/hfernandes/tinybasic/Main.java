@@ -17,7 +17,7 @@ public class Main {
         ProgramOptions options = ProgramOptions.fromArgs(args);
 
         if (options.showHelp) {
-            ProgramOptions.usage();
+            System.out.println(ProgramOptions.usage());
             return;
         }
 

@@ -32,7 +32,7 @@ public class ProgramOptions {
         return options;
     }
 
-    public static void usage() {
+    public static String usage() {
         String helpText = "" +
                 "--------------------------------\n" +
                 "    TinyBasic Implementation    \n" +
@@ -43,6 +43,6 @@ public class ProgramOptions {
                 "\n" +
                 "       --gui       Show AST GUI instead of executing.\n" +
                 "       --help      Show this help message.\n";
-        System.out.println(helpText);
+        return helpText;
     }
 }

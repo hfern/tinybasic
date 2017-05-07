@@ -3,7 +3,7 @@ MVN ?= mvn
 EXECJAR ?= target/tinybasic-0.0.1-jar-with-dependencies.jar
 
 build:
-	$(MVN) package
+	$(MVN) -DskipTests package
 
 grammar:
 	$(ANTLR4) TinyBasic.g4 -o src/main/java/com/hfernandes/tinybasic/generated \
