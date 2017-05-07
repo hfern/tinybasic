@@ -1,0 +1,17 @@
+// FACTORIAL PROGRAM
+    GOTO 500
+
+// Def of Factorial:
+// Takes Input X, Outputs Y
+100 LET Y=1
+110 LET Y = Y * X
+    LET X = X-1
+    IF X > 1 THEN GOTO 110
+    RETURN
+
+500 PRINT "Factorial Program :)"
+    PRINT "Enter the number to factorial: "
+    INPUT X
+    LET Z=X
+    GOSUB 100
+    PRINT "The factorial of ", Z, " is ", Y
