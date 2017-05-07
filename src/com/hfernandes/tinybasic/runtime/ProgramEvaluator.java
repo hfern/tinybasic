@@ -2,9 +2,7 @@ package com.hfernandes.tinybasic.runtime;
 
 import com.hfernandes.tinybasic.generated.TinyBasicLexer;
 import com.hfernandes.tinybasic.generated.TinyBasicParser;
-import com.hfernandes.tinybasic.runtime.evaluators.Evaluator;
-import com.hfernandes.tinybasic.runtime.evaluators.LetEvaluator;
-import com.hfernandes.tinybasic.runtime.evaluators.PrintEvaluator;
+import com.hfernandes.tinybasic.runtime.evaluators.*;
 import com.hfernandes.tinybasic.runtime.exceptions.GrammarViolatedException;
 import com.hfernandes.tinybasic.runtime.exceptions.TinyBasicException;
 import com.hfernandes.tinybasic.runtime.utils.TokenRecognizer;
@@ -32,8 +30,8 @@ public class ProgramEvaluator {
         // TODO(hunter): handle gosub
         // TODO(hunter): handle clear
         // TODO(hunter): handle list
-        // TODO(hunter): handle run
-        // TODO(hunter): handle end
+        statementHandlers.put(TinyBasicLexer.RUN, setPE(new RunEvaluator()));
+        statementHandlers.put(TinyBasicLexer.END, setPE(new EndEvaluator()));
     }
 
     public void setProgram(TinyBasicParser.ProgramContext programContext) {
