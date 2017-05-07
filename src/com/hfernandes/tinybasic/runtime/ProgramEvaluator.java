@@ -25,10 +25,11 @@ public class ProgramEvaluator {
         statementHandlers = new HashMap<>();
         statementHandlers.put(TinyBasicLexer.PRINT, setPE(new PrintEvaluator()));
         // TODO(hunter): handle if
-        // TODO(hunter): handle goto
+        statementHandlers.put(TinyBasicLexer.GOTO, setPE(new GotoEvaluator()));
         statementHandlers.put(TinyBasicLexer.INPUT, setPE(new InputEvaluator()));
         statementHandlers.put(TinyBasicLexer.LET, setPE(new LetEvaluator()));
         // TODO(hunter): handle gosub
+        // TODO(hunter): handle return
         statementHandlers.put(TinyBasicLexer.CLEAR, setPE(new ClearEvaluator()));
         statementHandlers.put(TinyBasicLexer.LIST, setPE(new ListEvaluator()));        statementHandlers.put(TinyBasicLexer.RUN, setPE(new RunEvaluator()));
         statementHandlers.put(TinyBasicLexer.END, setPE(new EndEvaluator()));
