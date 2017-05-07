@@ -4,4 +4,4 @@
 10  PRINT "Hunter!"
 20  RETURN
 // Do something here
-100 IF X < 5 GOSUB 5
+100 IF X < 5 THEN GOSUB 5
