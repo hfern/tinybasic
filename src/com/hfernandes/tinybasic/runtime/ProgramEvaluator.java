@@ -2,8 +2,14 @@ package com.hfernandes.tinybasic.runtime;
 
 import com.hfernandes.tinybasic.generated.TinyBasicLexer;
 import com.hfernandes.tinybasic.generated.TinyBasicParser;
+import com.hfernandes.tinybasic.runtime.evaluators.Evaluator;
+import com.hfernandes.tinybasic.runtime.evaluators.PrintEvaluator;
+import com.hfernandes.tinybasic.runtime.exceptions.GrammarViolatedException;
+import com.hfernandes.tinybasic.runtime.exceptions.TinyBasicException;
+import com.hfernandes.tinybasic.runtime.utils.TokenRecognizer;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.TerminalNode;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,8 +19,13 @@ public class ProgramEvaluator {
 
     public ArrayList<TinyBasicParser.StatementContext> statementLines;
 
+    protected HashMap<Integer, Evaluator> statementHandlers;
+
     public ProgramEvaluator(ProgramState state) {
         this.state = state;
+
+        statementHandlers = new HashMap<>();
+        statementHandlers.put(TinyBasicLexer.PRINT, setPE(new PrintEvaluator()));
     }
 
     public void setProgram(TinyBasicParser.ProgramContext programContext) {
@@ -36,35 +47,41 @@ public class ProgramEvaluator {
 
     // Evaluate the next line, specified by state.pc
     // returns true while the program has not terminated
-    public boolean step() {
+    public boolean step() throws TinyBasicException {
         if (state.pc >= statementLines.size()) {
             return false; // program done :)
         }
 
         state.pc++;
-        return runStatement(state.pc - 1);
+        TinyBasicParser.StatementContext stmtToRun = statementLines.get(state.pc - 1);
+
+        try {
+            return runStatement(stmtToRun);
+        } catch (TinyBasicException e) {
+            //TODO(hunter): Attach statement context info to the exception here!
+            // This can help users figure out why their program crashed.
+            throw e;
+        }
     }
 
-    protected boolean runStatement(Integer statementId) {
-        TinyBasicParser.StatementContext stmt = statementLines.get(statementId);
-        System.out.println("Running statement " + statementId);
-
+    protected boolean runStatement(TinyBasicParser.StatementContext stmt) throws TinyBasicException {
         if (!(stmt.getChild(0) instanceof TerminalNode)) {
             throw new RuntimeException("Critical: Statement expected first item to be stmt type token, is not!");
         }
 
         TerminalNode exprType = ((TerminalNode) stmt.getChild(0));
 
-        if (terminalIs(exprType, TinyBasicLexer.PRINT)) {
-
+        if (!TokenRecognizer.isTerminal(exprType)) {
+            throw new GrammarViolatedException();
         }
 
-        return true;
-    }
+        Evaluator handler = statementHandlers.get(TokenRecognizer.getTerminalType(exprType));
 
-    public static boolean terminalIs(TerminalNode node, int tokenType)
-    {
-        return node.getSymbol().getType() == tokenType;
+        if (handler == null) {
+            throw new TinyBasicException("I have not implemented handler for " + exprType.getText());
+        }
+
+        return handler.evaluate(stmt);
     }
 
     // Get an array of expressions from an expr list
@@ -78,5 +95,10 @@ public class ProgramEvaluator {
         }
 
         return list;
+    }
+
+    private Evaluator setPE(Evaluator evaler) {
+        evaler.setProgramEvaluator(this);
+        return evaler;
     }
 }

@@ -6,6 +6,7 @@ import com.hfernandes.tinybasic.generated.TinyBasicLexer;
 import com.hfernandes.tinybasic.generated.TinyBasicParser;
 import com.hfernandes.tinybasic.runtime.ProgramState;
 import com.hfernandes.tinybasic.runtime.evaluators.ExprEvaluator;
+import com.hfernandes.tinybasic.runtime.exceptions.UnsetVariableException;
 import com.hfernandes.tinybasic.runtime.vals.Value;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
@@ -13,42 +14,30 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.Tree;
 import org.junit.jupiter.api.Test;
+import test.com.hfernandes.tinybasic.TestBase;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class ExprEvaluatorTest {
+public class ExprEvaluatorTest extends TestBase {
     // get an expression context from an expression string
-    ParserErrorTuple parse(String program) {
-        ErrorListener errorListener = new ErrorListener();
 
-        CharStream input = CharStreams.fromString(program, "<sourcename>");
-        TinyBasicLexer lexer = new TinyBasicLexer(input);
-        lexer.removeErrorListeners();
-        lexer.addErrorListener(errorListener);
-
-        CommonTokenStream tokenStream = new CommonTokenStream(lexer);
-        TinyBasicParser parser = new TinyBasicParser(tokenStream);
-        parser.removeErrorListeners();
-        parser.addErrorListener(errorListener);
-        return new ParserErrorTuple(parser, errorListener);
-    }
 
     TinyBasicParser.ExpressionContext parseExpr(String exprString) throws AntlrException {
-        ParserErrorTuple tuple = parse(exprString);
+        ParserErrorTuple tuple = getParser(exprString);
         TinyBasicParser.ExpressionContext tree = tuple.parser.expression();
         tuple.errors.raiseErrors();
         return tree;
     }
 
     TinyBasicParser.FactorContext parseFactor(String exprString) throws AntlrException {
-        ParserErrorTuple tuple = parse(exprString);
+        ParserErrorTuple tuple = getParser(exprString);
         TinyBasicParser.FactorContext factor = tuple.parser.factor();
         tuple.errors.raiseErrors();
         return factor;
     }
 
     TinyBasicParser.TermContext parseTerm(String exprString) throws AntlrException {
-        ParserErrorTuple tuple = parse(exprString);
+        ParserErrorTuple tuple = getParser(exprString);
         TinyBasicParser.TermContext term = tuple.parser.term();
         tuple.errors.raiseErrors();
         return term;
@@ -133,14 +122,14 @@ public class ExprEvaluatorTest {
         Value v = ExprEvaluator.evaluateTerm(new ProgramState(), parseTerm("10 / 3"));
         assertEquals(3, v.val.longValue());
     }
-}
 
-class ParserErrorTuple {
-    public TinyBasicParser parser;
-    public ErrorListener errors;
-
-    public ParserErrorTuple(TinyBasicParser parser, ErrorListener errors) {
-        this.parser = parser;
-        this.errors = errors;
+    @Test
+    void test_unknown_variable_throws() throws Exception {
+        try {
+            ExprEvaluator.evaluate(new ProgramState(), parseExpr("X"));
+            fail("Unset variable exception should have been thrown");
+        } catch (UnsetVariableException e) {
+            // swallow
+        }
     }
 }

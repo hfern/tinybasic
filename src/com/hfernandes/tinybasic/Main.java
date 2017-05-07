@@ -5,6 +5,7 @@ import com.hfernandes.tinybasic.antlrstrap.AntlrException;
 import com.hfernandes.tinybasic.generated.TinyBasicParser;
 import com.hfernandes.tinybasic.runtime.ProgramEvaluator;
 import com.hfernandes.tinybasic.runtime.ProgramState;
+import com.hfernandes.tinybasic.runtime.exceptions.TinyBasicException;
 import org.antlr.v4.runtime.tree.ParseTree;
 import com.hfernandes.tinybasic.ProgramParser;
 
@@ -34,8 +35,14 @@ public class Main {
         ProgramEvaluator evaluator = new ProgramEvaluator(new ProgramState());
         evaluator.setProgram((TinyBasicParser.ProgramContext) tree);
 
-        for (int stepCount = 0; evaluator.step(); stepCount++) {
-            // pass :)
+        try {
+            for (int stepCount = 0; evaluator.step(); stepCount++) {
+                // pass :)
+            }
+        } catch (TinyBasicException e) {
+            System.out.println("An error occurred during execution: " + e);
+            e.printStackTrace();
+            return;
         }
 
         System.out.println("Got to here in this!");

@@ -20,6 +20,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 // Evaluates an Expr
+// This is a special one because it is only a fragment, not a statement-level evaluator
 public class ExprEvaluator {
     public static Value evaluate(ProgramState state, ExpressionContext expr) throws TinyBasicException {
         boolean negate = false;

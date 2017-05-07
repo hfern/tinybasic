@@ -3,6 +3,8 @@ package com.hfernandes.tinybasic.runtime;
 import com.hfernandes.tinybasic.runtime.exceptions.UnsetVariableException;
 import com.hfernandes.tinybasic.runtime.vals.Value;
 
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.util.HashMap;
 
 // This represents the state of the program, including
@@ -23,10 +25,19 @@ public class ProgramState {
     // Stmt index to run next.
     public Integer pc;
 
+    // The input stream to read from
+    public InputStream is;
+
+    // The standard output stream to write to
+    public OutputStream os;
+
     public ProgramState() {
         varMap = new HashMap<String, Value>();
         lineMap = new HashMap<String, Integer>();
         pc = 0;
+
+        is = System.in;
+        os = System.out;
     }
 
     public Value getVarVal(String varName) throws UnsetVariableException {
