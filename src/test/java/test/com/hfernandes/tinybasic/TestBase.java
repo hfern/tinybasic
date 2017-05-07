@@ -6,8 +6,6 @@ import com.hfernandes.tinybasic.generated.TinyBasicLexer;
 import com.hfernandes.tinybasic.generated.TinyBasicParser;
 import com.hfernandes.tinybasic.runtime.ProgramEvaluator;
 import com.hfernandes.tinybasic.runtime.ProgramState;
-import com.hfernandes.tinybasic.runtime.exceptions.TinyBasicException;
-import junit.framework.TestCase;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
