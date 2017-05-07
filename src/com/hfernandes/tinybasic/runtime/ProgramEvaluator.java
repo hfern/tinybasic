@@ -62,7 +62,7 @@ public class ProgramEvaluator {
         return true;
     }
 
-    static boolean terminalIs(TerminalNode node, int tokenType)
+    public static boolean terminalIs(TerminalNode node, int tokenType)
     {
         return node.getSymbol().getType() == tokenType;
     }

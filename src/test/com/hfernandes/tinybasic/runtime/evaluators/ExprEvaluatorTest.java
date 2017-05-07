@@ -47,30 +47,55 @@ public class ExprEvaluatorTest {
         return factor;
     }
 
-    @Test
+    TinyBasicParser.TermContext parseTerm(String exprString) throws AntlrException {
+        ParserErrorTuple tuple = parse(exprString);
+        TinyBasicParser.TermContext term = tuple.parser.term();
+        tuple.errors.raiseErrors();
+        return term;
+    }
+
+//    @Test
     void test_simple_numbers() throws Exception {
         Value v = ExprEvaluator.evaluate(new ProgramState(), parseExpr("42"));
         assertEquals(v.val.longValue(), 42);
     }
 
-    @Test
+//    @Test
     void test_negative_numbers() throws Exception {
         Value v = ExprEvaluator.evaluate(new ProgramState(), parseExpr("-3"));
         assertEquals(v.val.longValue(), -3);
     }
 
-    @Test
+//    @Test
     void test_simple_factor() throws Exception {
         Value v = ExprEvaluator.evaluateFactor(new ProgramState(), parseFactor("9"));
         assertEquals(v.val.longValue(), 9);
     }
 
-    @Test
+//    @Test
     void test_var_factor() throws Exception {
         ProgramState ps = new ProgramState();
         ps.varMap.put("X", new Value(666));
         Value v = ExprEvaluator.evaluateFactor(ps, parseFactor("X"));
         assertEquals(666, v.val.longValue());
+    }
+
+//    @Test
+    void test_factor_parens() throws Exception {
+        Value v = ExprEvaluator.evaluateFactor(new ProgramState(), parseFactor("( 10 )"));
+        assertEquals(v.val.longValue(), 10);
+    }
+
+    @Test
+    void test_term_evals_multiplication() throws Exception {
+        Value v = ExprEvaluator.evaluateTerm(new ProgramState(), parseTerm("3 * 10"));
+        assertEquals(30, v.val.longValue());
+    }
+
+    @Test
+    void test_term_evals_division() throws Exception {
+        Value v = ExprEvaluator.evaluateTerm(new ProgramState(), parseTerm("10 / 3"));
+        assertEquals(3, v.val.longValue());
     }
 }
 

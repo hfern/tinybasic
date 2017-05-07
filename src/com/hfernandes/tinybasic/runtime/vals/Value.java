@@ -15,4 +15,8 @@ public class Value {
     public Value(Integer i) {
         val = i;
     }
+
+    public Value clone() {
+        return new Value(new Integer(val));
+    }
 }
